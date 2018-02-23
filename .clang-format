@@ -78,7 +78,7 @@ SpacesInAngles:  false
 SpaceInEmptyParentheses: false
 SpacesInCStyleCastParentheses: false
 SpaceAfterCStyleCast: false
-SpacesInContainerLiterals: false
+SpacesInContainerLiterals: true
 SpaceBeforeAssignmentOperators: true
 
 ContinuationIndentWidth: 4
