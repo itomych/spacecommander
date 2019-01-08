@@ -33,6 +33,17 @@ function objc_files_to_format() {
 	echo "$files" | grep -v 'Pods/' | grep -v 'Carthage/' >&1
 }
 
+# Returns a list of cached and uncached Objective-C files to format.
+# If .formatting-directory exists, then only directories specified in .formatting-directory will be included (see directories_to_check).
+# If .formatting-directory-ignore exists, then directories specified in .formatting-directory-ignore will be excluded (see directories_to_ignore).
+function objc_files_changed() {
+	directories_to_check
+	# optional_base_sha is intentionally unescaped so that it will not appear as empty quotes.
+	files=$(git diff HEAD --name-only --diff-filter=ACM -- $locations_to_diff | grep -e '\.m$' -e '\.mm$' -e '\.h$' -e '\.hh$')
+	directories_to_ignore
+	echo "$files" | grep -v 'Pods/' | grep -v 'Carthage/' >&1
+}
+
 # Returns a list of all Objective-C files in the git repository.
 # If .formatting-directory exists, then only directories specified in .formatting-directory will be included (see directories_to_check).
 # If .formatting-directory-ignore exists, then directories specified in .formatting-directory-ignore will be excluded (see directories_to_ignore). 
